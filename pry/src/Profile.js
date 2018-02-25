@@ -38,7 +38,7 @@ class Home extends Component {
         </Grid>
         </Content>
         <Content>
-        <List>
+        <List style={{ marginLeft: -17 }}>
           <ListItem avatar>
             <Body>
               <Text note>Doing what you like will always keep you happy . .</Text>
