@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import { TextInput } from 'react-native';
 import { 
   Container, 
   Content,
+  Header,
   Thumbnail,
   Text,
+  Title,
   Form, 
-  Item, 
-  Input, 
-  Label,
   Icon,
-  Button
+  Button,
+  Left,
+  Body,
+  List,
+  ListItem,
+  Right
 } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
@@ -20,35 +25,45 @@ class Opinion extends Component {
     const { navigate } = this.props.navigation
     return (
       <Container>
-        <Content>
+        <Header>
+            <Left>
+              <Title>Opinion</Title>
+            </Left>
+            <Right>
+              <Title>Share</Title>
+            </Right>
+        </Header>
+        <Content style={{ backgroundColor: 'white' }}>
           <Grid>
-            <Col style={{
-              backgroundColor: '#635DB7', 
-              alignItems: 'center',
-              width: '100%', 
-              height: 250 
-            }}>
-              <Thumbnail square style={{ width: '100%', height: '100%' }} source={{uri: 'https://4.bp.blogspot.com/-0VljF-HhePw/WXc5-kPHVvI/AAAAAAAASJo/jEV_mx5bq2g2bRMGUWFW2IkPpvLEeMX3ACLcBGAs/s1600/palangka%2Braya%2Bmalam%2Bhari%2B2.jpeg'}} />
-            </Col>
-          </Grid>
-        </Content>
-        <Content>
-          <Grid>
-            <Col style={{
-              width: '90%' 
-            }}>
+            <Col>
               <Form style={{ marginBottom: 20 }}>
-                <Item stackedLabel>
-                  <Label>Opinion</Label>
-                  <Input />
-                </Item>
+                  <TextInput
+                    multiline = {true}
+                    numberOfLines = {5}
+                    placeholder="What's On Your Opinion"
+                  />                
               </Form>
             </Col>
+            
           </Grid>
-          <Button rounded light style={{ alignSelf: 'center', marginBottom: 10 }}>
-            <Icon name='ios-megaphone' style={{ alignContent: 'center' }} />
-            <Text>Submit</Text>
-          </Button>
+          <List style={{ marginLeft: -17 }}>
+            <ListItem avatar>
+              <Body>
+                <Text note>Doing what you like will always keep you happy . .</Text>
+              </Body>
+              <Right>
+                <Text note>3:43 pm</Text>
+              </Right>
+            </ListItem>
+            <ListItem avatar>
+              <Body>
+                <Text note>Doing what you like will always keep you happy . .</Text>
+              </Body>
+              <Right>
+                <Text note>3:43 pm</Text>
+              </Right>
+            </ListItem>
+          </List>
         </Content>
         <NavigasiFooter navigate={navigate} />
       </Container>
