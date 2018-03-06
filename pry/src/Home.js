@@ -16,8 +16,14 @@ import {
 import NavigasiFooter from './NavigasiFooter';
 
 class Home extends Component {
+
+  constructor(props){
+    super()
+  }
+
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
+    const { routeName } = this.props.navigation.state;
     return (
       <Container>
         <Header>
@@ -54,7 +60,7 @@ class Home extends Component {
           </ListItem>
         </List>
         </Content>
-        <NavigasiFooter navigate={navigate} />
+        <NavigasiFooter navigate={navigate} routeName={routeName} />
       </Container>
     );
   }

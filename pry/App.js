@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
-import { Container } from 'native-base';
+import { Spinner } from 'native-base';
 
-import Home from './src/Home';
-import Opinion from './src/Opinion';
-import Profile from './src/Profile';
+import { isSignedIn } from './src/Auth'; 
+import { crateNavigator } from './src/Router'; 
 
-const AppNavigator = StackNavigator({
-  Home: {
-    screen: Home
-  },
-  Opinion: {
-    screen: Opinion
-  },
-  Profile: {
-    screen: Profile
-  }
-}, {
-  headerMode: 'none',
-  initialRouteName: 'Opinion',
-})
+import Login from './src/Login';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state= {
+      isLogin: false,
+      checkedSignIn: false
+    }
+  }
+  
+  componentWillMount () {
+    isSignedIn()
+      .then(res => {
+        this.setState({
+          isLogin: res,
+          checkedSignIn: true
+        })
+      })
+  }
+
   render() {
-    return (
-      <Container>
-        <AppNavigator />
-      </Container>
-    );
+    const { isLogin, checkedSignIn } = this.state;
+    console.log(isLogin)
+    
+    if (!checkedSignIn) {
+      return <Spinner />;
+    }
+ 
+    const Layout = crateNavigator(isLogin);
+
+    return <Layout />;
   }
 }
 

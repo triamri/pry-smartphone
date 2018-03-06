@@ -19,8 +19,15 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import NavigasiFooter from './NavigasiFooter';
 
 class Home extends Component {
+
+  constructor(props){
+    super()
+  }
+
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
+    const { routeName } = this.props.navigation.state;
+
     return (
       <Container>
         <Content>
@@ -57,7 +64,7 @@ class Home extends Component {
           </ListItem>
         </List>
         </Content>
-        <NavigasiFooter navigate={navigate} />
+        <NavigasiFooter navigate={navigate} routeName={routeName} />
       </Container>
     );
   }
