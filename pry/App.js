@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import { Spinner } from 'native-base';
 
 import { isSignedIn } from './src/Auth'; 
 import { crateNavigator } from './src/Router'; 
 
-import Login from './src/Login';
+import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +28,6 @@ class App extends Component {
 
   render() {
     const { isLogin, checkedSignIn } = this.state;
-    console.log(isLogin)
     
     if (!checkedSignIn) {
       return <Spinner />;
@@ -35,7 +35,11 @@ class App extends Component {
  
     const Layout = crateNavigator(isLogin);
 
-    return <Layout />;
+    return (
+      <Provider store={ store }>
+          <Layout />
+      </Provider>
+    );
   }
 }
 

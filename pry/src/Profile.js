@@ -25,7 +25,7 @@ class Home extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate,goBack } = this.props.navigation;
     const { routeName } = this.props.navigation.state;
 
     return (
@@ -64,7 +64,7 @@ class Home extends Component {
           </ListItem>
         </List>
         </Content>
-        <NavigasiFooter navigate={navigate} routeName={routeName} />
+        <NavigasiFooter navigate={navigate} goBack={goBack} routeName={routeName} />
       </Container>
     );
   }
