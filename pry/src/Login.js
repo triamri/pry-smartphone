@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Text, AsyncStorage, TouchableOpacity, ImageBackground } from 'react-native';
 import { 
   Container,
@@ -15,44 +16,23 @@ import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 import { isSignedIn } from './Auth';
 
+import { getLogin } from '../Actions';
+
 class Login extends Component {
 
   constructor(props) {
     super(props)
-    // this.state = {
-    //   name: null,
-    //   email: null,
-    //   photo: null,
-    //   SignedIn: null
-    // }
   }
 
   componentWillMount() {
     GoogleSignin.hasPlayServices({ autoResolve: true })
     GoogleSignin.configure({
       webClientId: '786402833154-0obpv5qjqg5tmb6gdfbag4ba9b7vj6nb.apps.googleusercontent.com'
-    })
-    // this._loadInitialState(); 
+    }) 
   }
 
-  // async _loadInitialState() {
-  //   try {
-  //     let user = await AsyncStorage.getItem('user');
-  //     if (user !== null) {
-  //       let getUser = JSON.parse(user);
-  //       this.setState({
-  //         name: getUser.name,
-  //         email: getUser.email,
-  //         photo: getUser.photo,
-  //         SignedIn: true
-  //       })
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   googleLogin () {
+    const { navigate } = this.props.navigation;
     GoogleSignin.signIn()
     .then((user) => {
       let data = {
@@ -62,6 +42,8 @@ class Login extends Component {
       }
       this.setState(data);
       AsyncStorage.setItem('user', JSON.stringify(data));
+      this.props.getLogin();
+      navigate('Home');
     })
     .catch((error) => {
       // For details of error codes, see the docs
@@ -74,7 +56,7 @@ class Login extends Component {
   }
 
   render() {
-    // console.log('auth', this.state.SignedIn);
+    console.log('auth', this.props.onLogin);
     return (
       <Container>
         <Content>
@@ -110,14 +92,8 @@ class Login extends Component {
             <Icon name='logo-google' />
             <Text style={{ color: 'white', paddingRight: 20 }}>Google Login</Text>
           </Button>
-          {/* <Text>{ this.state.name }</Text> */}
           </Row>
-          <Button onPress={() => this.onPressLogout()} >
-            <Text>Log Out</Text>
-          </Button>
           </Col>
-          {/* <Row style={{ backgroundColor: '#00CE9F', height: 400 }}>
-          </Row> */}
         </Grid>
         </ImageBackground>
         </Content>
@@ -126,4 +102,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    onLogin: state.onLogin
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getLogin: () => dispatch(getLogin())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

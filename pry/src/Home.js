@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
   Container, 
   Header, 
@@ -13,6 +14,7 @@ import {
   Thumbnail
 } from 'native-base';
 
+import { getNav } from '../Actions';
 import NavigasiFooter from './NavigasiFooter';
 
 class Home extends Component {
@@ -21,9 +23,19 @@ class Home extends Component {
     super()
   }
 
+  // componentWillMount() {
+  //   const { routeName } = this.props.navigation.state;
+  //   this.props.getNav(routeName);    
+  // }
+
+  // componentDidMount() {
+  //   console.log('did', this.props.nav);
+  // }
+
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate,goBack } = this.props.navigation;
     const { routeName } = this.props.navigation.state;
+    console.log('nav', this.props.nav);
     return (
       <Container>
         <Header>
@@ -60,10 +72,23 @@ class Home extends Component {
           </ListItem>
         </List>
         </Content>
-        <NavigasiFooter navigate={navigate} routeName={routeName} />
+        <NavigasiFooter navigate={navigate} goBack={goBack} routeName={routeName} />
       </Container>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    nav: state.nav,
+    onLogin: state.onLogin
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getNav: (nav) => dispatch(getNav(nav))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

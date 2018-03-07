@@ -9,38 +9,29 @@ import {
 } from 'native-base';
 
 class NavigasiFooter extends Component {
-
-  
+ 
   componentDidMount() {
-    console.log(this.props.routeName);
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this)) 
+    console.log(this.props);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton) 
   }
   
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton.bind(this))
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton)
   }
 
   handleBackButton = () => {
-    alert(this.props.routeName);
-    // Alert.alert(
-    //     'Exit App',
-    //     'Exiting the application?', [{
-    //         text: 'Cancel',
-    //         onPress: () => console.log('Cancel Pressed'),
-    //         style: 'cancel'
-    //     }, {
-    //         text: 'OK',
-    //         onPress: () => BackHandler.exitApp()
-    //     }, ], {
-    //         cancelable: false
-    //     }
-    //  )
-    //  return true;
+    if (this.props.routeName === 'Home') {
+      BackHandler.exitApp()
+      return true;
+    } else {
+      this.props.goBack();
+      return true;
+    }
   }
 
   onPressLogout () {
-    alert('logout');
     AsyncStorage.removeItem('user');
+    this.props.navigate('Login');
   }
 
   render() {
