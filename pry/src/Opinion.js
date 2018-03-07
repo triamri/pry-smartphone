@@ -21,8 +21,15 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import NavigasiFooter from './NavigasiFooter';
 
 class Opinion extends Component {
+
+  constructor(props){
+    super()
+  }
+
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
+    const { routeName } = this.props.navigation.state;
+
     return (
       <Container>
         <Header>
@@ -43,8 +50,7 @@ class Opinion extends Component {
                     placeholder="What's On Your Opinion"
                   />                
               </Form>
-            </Col>
-            
+            </Col>            
           </Grid>
           <List style={{ marginLeft: -17 }}>
             <ListItem avatar>
@@ -65,7 +71,7 @@ class Opinion extends Component {
             </ListItem>
           </List>
         </Content>
-        <NavigasiFooter navigate={navigate} />
+        <NavigasiFooter navigate={navigate} routeName={routeName} />
       </Container>
     );
   }

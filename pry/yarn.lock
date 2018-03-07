@@ -1587,6 +1587,10 @@ execa@^0.8.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
+exit-on-double-back@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/exit-on-double-back/-/exit-on-double-back-1.0.1.tgz#30ba71ba548286e2719fcb02d14f2541ba36bdf7"
+
 exit@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
@@ -3728,11 +3732,15 @@ react-native-drawer@2.5.0:
     prop-types "^15.5.8"
     tween-functions "^1.0.1"
 
-react-native-easy-grid@0.1.17:
+react-native-easy-grid@0.1.17, react-native-easy-grid@^0.1.17:
   version "0.1.17"
   resolved "https://registry.yarnpkg.com/react-native-easy-grid/-/react-native-easy-grid-0.1.17.tgz#fad8cb371d465828c1c71daa4d8b513d33253452"
   dependencies:
     lodash "^4.11.1"
+
+react-native-google-signin@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-0.12.0.tgz#fc549593adbc92ed2a5a683a957f157650ece961"
 
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
